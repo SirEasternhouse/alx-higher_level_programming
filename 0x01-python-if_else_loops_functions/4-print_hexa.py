@@ -1,4 +1,4 @@
 #!/usr/bin/python3
-for num in range(1, 99):
+for num in range(0, 99):
     hex_num = hex(num)
     print("{} = {}".format(num, hex_num))
