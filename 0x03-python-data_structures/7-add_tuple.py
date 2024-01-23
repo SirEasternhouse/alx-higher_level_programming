@@ -2,7 +2,7 @@
 def add_tuple(tuple_a=(), tuple_b=()):
 
     if len(tuple_a) < 2:
-        a = tuple_a +(0, 0)
+        a = tuple_a + (0, 0)
     else:
         a = tuple_a[:2]
 
@@ -11,5 +11,5 @@ def add_tuple(tuple_a=(), tuple_b=()):
     else:
         b = tuple_b[:2]
 
-    result = (a[0] + b[0], a[1] + b[1] )
+    result = (a[0] + b[0], a[1] + b[1])
     return result
