@@ -1,4 +1,4 @@
 #!/usr/bin/python3
-class square:
-    """ Defining a Square class to determine area"""
+class Square:
+    """ Defining an empty Square class"""
     pass
