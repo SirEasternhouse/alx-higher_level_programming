@@ -3,6 +3,9 @@ class Rectangle:
     """
     Represents a rectangle with a width and height.
 
+    Attributes:
+        width (int): The width of the rectangle. Must be an integer greater than or equal to 0.
+        height (int): The height of the rectangle. Must be an integer greater than or equal to 0.
     """
 
     def __init__(self, width=0, height=0):
@@ -17,7 +20,7 @@ class Rectangle:
             TypeError: If either width or height is not an integer.
             ValueError: If either width or height is less than 0.
         """
-
+ 
         self._validate_width(width)
         self._validate_height(height)
 
@@ -25,17 +28,17 @@ class Rectangle:
         self.__height = height
 
     @property
-    def width(self):
+    def height(self):
         """
         Gets the width of the rectangle.
 
         Returns:
             int: The width of the rectangle.
         """
-        return self.__width
+        return self.__height
 
-    @width.setter
-    def width(self, value):
+    @height.setter
+    def height(self, value):
         """
         Sets the width of the rectangle.
 
@@ -46,11 +49,11 @@ class Rectangle:
             TypeError: If value is not an integer.
             ValueError: If value is less than 0.
         """
-        self._validate_width(value)
-        self.__width = value
+        self._validate_height(value)
+        self.__height = value
 
     @property
-    def height(self):
+    def width(self):
         """
         Gets the height of the rectangle.
 
@@ -59,8 +62,8 @@ class Rectangle:
         """
         return self.__height
 
-    @height.setter
-    def height(self, value):
+    @width.setter
+    def width(self, value):
         """
         Sets the height of the rectangle.
 
@@ -71,10 +74,10 @@ class Rectangle:
             TypeError: If value is not an integer.
             ValueError: If value is less than 0.
         """
-        self._validate_height(value)
-        self.__height = value
+        self._validate_width(value)
+        self.__width = value
 
-    def _validate_width(self, value):
+    def _validate_height(self, value):
         """
         Validates the width value.
 
@@ -90,7 +93,7 @@ class Rectangle:
         if value < 0:
             raise ValueError("width must be >= 0")
 
-    def _validate_height(self, value):
+    def _validate_width(self, value):
         """
         Validates the height value.
 
@@ -105,3 +108,14 @@ class Rectangle:
             raise TypeError("height must be an integer")
         if value < 0:
             raise ValueError("height must be >= 0")
+
+    def __repr__(self):
+        """
+        Returns a string representation of the rectangle.
+
+        Returns:
+            str: String representation of the rectangle.
+        """
+        return "{{'_Rectangle__width': {}, '_Rectangle__height': {}}}".format(
+                self.__width, self.__height)
+
