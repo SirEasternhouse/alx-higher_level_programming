@@ -1,11 +1,22 @@
+"""
+Test cases for the add_integer function.
+
+This file contains doctests to verify the behavior of the add_integer function in various scenarios.
+
+Test cases cover:
+- Addition of two positive integers.
+- Addition of positive and negative integers.
+- Addition of floating-point numbers.
+- Handling of default value for 'b' parameter.
+- Handling of invalid input types.
+
+"""
+
 >>> add_integer = __import__('0-add_integer').add_integer
-""" testing 2 integers"""
 >>> add_integer(2, 3)
 5
-"""testing input a only while b is automatically set at 98"""
 >>> add_integer(2)
 100
-""" testing float input in a and converted to int"""
 >>> add_integer(5.5)
 103
 >>> add_integer('2')
