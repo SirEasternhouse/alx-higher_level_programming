@@ -1,1 +1,32 @@
-""""Test3"""
+"""
+Test cases for the print_square function.
+
+This file contains doctests to verify the behavior of the print_square function in various scenarios.
+
+Test cases cover:
+- Printing a square with a positive size.
+- Handling of invalid input types.
+- Handling of negative size.
+
+"""
+
+>>> print_square = __import__('4-print_square').print_square
+>>> print_square(3)
+###
+###
+###
+>>> print_square(5)
+#####
+#####
+#####
+#####
+#####
+>>> print_square(0)
+>>> print_square(-2)
+Traceback (most recent call last):
+    ...
+ValueError: size must be >= 0
+>>> print_square(2.5)
+Traceback (most recent call last):
+    ...
+TypeError: size must be an integer
