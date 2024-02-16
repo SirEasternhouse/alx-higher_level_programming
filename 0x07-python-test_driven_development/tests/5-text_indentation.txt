@@ -1,1 +1,31 @@
-test 4
+"""
+Test cases for the text_indentation function.
+
+This file contains doctests to verify the behavior of the text_indentation function in various scenarios.
+
+Test cases cover:
+- Printing text with new lines after '.', '?', and ':' characters.
+- Handling of invalid input types.
+
+"""
+
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+>>> text_indentation("This is a simple text. With some punctuation? And some more!")
+This is a simple text
+
+With some punctuation
+
+And some more!
+
+>>> text_indentation("No punctuation")
+No punctuation
+>>> text_indentation(123)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
+>>> text_indentation("This. Is: A test?")
+This
+
+Is
+
+A test
