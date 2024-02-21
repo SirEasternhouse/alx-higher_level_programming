@@ -6,7 +6,7 @@ def read_file(filename=""):
     """Reads a text file and prints its content to stdout.
 
     Args:
-        filename (str): The name of the file to read. Default is an empty string.
+        filename (str): The name of the file to read. 
 
     Returns:
         None
