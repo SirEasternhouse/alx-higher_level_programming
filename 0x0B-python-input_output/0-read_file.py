@@ -8,8 +8,6 @@ def read_file(filename=""):
     Returns:
         None
 
-    Raises:
-        FileNotFoundError: If the specified file is not found.
     """
     try:
         with open(filename, "r", encoding="utf-8") as file:
