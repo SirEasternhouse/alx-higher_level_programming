@@ -42,18 +42,18 @@ class Rectangle:
     def _validate_height(self, value):
         """Validates the height value."""
         if not isinstance(value, int):
-            raise TypeError("width must be an integer")
-        if value < 0:
-            raise ValueError("width must be >= 0")
-
-    def _validate_width(self, value):
-        """Validates the height value."""
-        if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value < 0:
             raise ValueError("height must be >= 0")
 
+    def _validate_width(self, value):
+        """Validates the height value."""
+        if not isinstance(value, int):
+            raise TypeError("width must be an integer")
+        if value < 0:
+            raise ValueError("width must be >= 0")
+
     def __repr__(self):
         """Returns a string representation of the rectangle"""
-        return "{{'_Rectangle__width': {}, '_Rectangle__height': {}}}".format(
-                self.__width, self.__height)
+        return "{{'_Rectangle__height': {}, '_Rectangle__width': {}}}".format(
+                self.__height, self.__width)
