@@ -101,7 +101,6 @@ class Rectangle(Base):
 
     def update(self, *args, **kwargs):
         """Assigns arguments to each attribute
-            
             Args:
                 *args: positional arguments.
                 **kwargs: Keyword argumnts.
@@ -113,7 +112,7 @@ class Rectangle(Base):
         elif kwargs:
             for key, val in kwargs.items():
                 setattr(self, key, val)
-    
+
     def to_dictionary(self):
         """
         Returns the dictionary representaation of a retangle
