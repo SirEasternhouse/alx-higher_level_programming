@@ -1,12 +1,7 @@
 #!/usr/bin/python3
-"""Unit tests for the base of Rectangle an square classes
-    
-    Unittest classes:
-    TestBase - line 13
-
-"""
-import os
+"""Unit tests for the base of Rectangle an square classes"""
 import unittest
+import os
 from models.base import Base
 
 
@@ -36,6 +31,33 @@ class TestBase(unittest.TestCase):
         obj2 = Base()
         obj3 = Base(id=10)
         self.assertEqual(obj3.id, 10)
+
+    def test_to_json_string(self):
+        """Test if convert list of dictionaries to JSON string"""
+        data = [{'key': 'value'}, {'key': 'value'}]
+        json_string = Base.to_json_string(data)
+        self.assertEqual(json_string, '[{"key": "value"}, {"key": "value"}]')
+
+    def test_from_json_string(self):
+        """Test if converts JSON string to list of dictionaries"""
+        json_string = '[{"key", "value"}, {"key": "value"}]'
+        data = Base.from_json_string(json_string)
+
+    def test_save_to_file(self):
+        """"Test if save_to_file writes JSON string to file."""
+        data = [{'key': 'value'}, {'key': 'value'}]
+        with open(self.filename, 'w') as file:
+            file.write('[{"key": "value"}, {"key": "value"}]')
+        instances = Base.load_from_file()
+        self.assertEqual(len(instances), 2)
+
+    def test_create(self):
+        """Test if create method creates instance with attributes set."""
+        dictionary = {'id': 1, 'key': 'value'}
+        instance = Base.create(**dictionary)
+        self.assertEqual(instance.id, 1)
+        self.assertEqual(instance.key, 'value')
+
 
 if __name__ == '__main__':
     unittest.main()
