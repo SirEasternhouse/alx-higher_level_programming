@@ -1,7 +1,11 @@
 #!/usr/bin/python3
+"""Unit tests for the base of Rectangle an square classes
+    
+    Unittest classes:
+    TestBase - line 13
+
 """
-    Unit tests for the base of Rectangle an square classes
-"""
+import os
 import unittest
 from models.base import Base
 
@@ -34,4 +38,4 @@ class TestBase(unittest.TestCase):
         self.assertEqual(obj3.id, 10)
 
 if __name__ == '__main__':
-    unittet.main()
+    unittest.main()
