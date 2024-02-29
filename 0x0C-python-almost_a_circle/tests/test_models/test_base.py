@@ -10,6 +10,15 @@ from models.square import Square
 class TestBase(unittest.TestCase):
     """Test cases for the Base class."""
 
+    def setUp(self):
+        """Set up test environment."""
+        self.filename = "Base.json"
+
+    def tearDown(self):
+        """Tear down test environment."""
+        if os.path.exists(self.filename):
+            os.remove(self.filename)
+
     def test_id_generation(self):
         """Test if the IDs are generated properly."""
         obj1 = Base()
@@ -35,18 +44,27 @@ class TestBase(unittest.TestCase):
         self.assertEqual(obj3.id, 10)
 
     def test_to_json_string(self):
-        """Test if convert list of dictionaries to JSON string"""
+        """Test if to_json_string converts list of dictionaries to JSON string."""
         data = [{'key': 'value'}, {'key': 'value'}]
         json_string = Base.to_json_string(data)
         self.assertEqual(json_string, '[{"key": "value"}, {"key": "value"}]')
 
     def test_from_json_string(self):
-        """Test if converts JSON string to list of dictionaries"""
-        json_string = '[{"key", "value"}, {"key": "value"}]'
+        """Test if from_json_string converts JSON string to list of dictionaries."""
+        json_string = '[{"key": "value"}, {"key": "value"}]'
         data = Base.from_json_string(json_string)
+        self.assertEqual(data, [{'key': 'value'}, {'key': 'value'}])
 
     def test_save_to_file(self):
-        """"Test if save_to_file writes JSON string to file."""
+        """Test if save_to_file writes JSON string to file."""
+        data = [{'key': 'value'}, {'key': 'value'}]
+        Base.save_to_file(data)
+        self.assertTrue(os.path.exists(self.filename))
+        with open(self.filename, 'r') as file:
+            self.assertEqual(file.read(), '[{"key": "value"}, {"key": "value"}]')
+
+    def test_load_from_file(self):
+        """Test if load_from_file returns list of instances from file."""
         data = [{'key': 'value'}, {'key': 'value'}]
         with open(self.filename, 'w') as file:
             file.write('[{"key": "value"}, {"key": "value"}]')
