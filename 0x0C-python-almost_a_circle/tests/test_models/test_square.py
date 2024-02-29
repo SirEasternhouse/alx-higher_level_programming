@@ -2,6 +2,9 @@
 """ Unittests for Square square class"""
 import unittest
 import os
+import io
+import sys
+from models.base import Base
 from models.square import Square
 
 
