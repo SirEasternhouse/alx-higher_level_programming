@@ -3,80 +3,87 @@
 import unittest
 import os
 from models.base import Base
-from models.rectangle import Rectangle
-from models.square import Square
 
 
 class TestBase(unittest.TestCase):
-    """Test cases for the Base class."""
+    """
+    Test cases for the Base class.
+    """
 
     def setUp(self):
-        """Set up test environment."""
-        self.filename = "Base.json"
+        """
+        Method called to prepare the test fixture.
+
+        It creates two Base objects for testing.
+        """
+        self.b1 = Base()
+        self.b2 = Base(10)
 
     def tearDown(self):
-        """Tear down test environment."""
-        if os.path.exists(self.filename):
-            os.remove(self.filename)
+        """
+        Method called after each test method to clean up resources.
 
-    def test_id_generation(self):
-        """Test if the IDs are generated properly."""
-        obj1 = Base()
-        obj2 = Base()
-        self.assertEqual(obj1.id, 1)
-        self.assertEqual(obj2.id, 2)
+        It deletes files created during testing.
+        """
+        # Delete files created during testing
+        try:
+            os.remove('Base.json')
+        except FileNotFoundError:
+            pass
 
-    def test_custom_id(self):
-        """Test if the custom IDs are assigned properly"""
-        obj = Base(id=100)
-        self.assertEqual(obj.id, 100)
+    def test_init(self):
+        """
+        Test the __init__ method of Base class.
 
-    def test_id_assignment(self):
-        """Test if IDs are assigned properly when provided."""
-        obj = Base(id=5)
-        self.assertEqual(obj.id, 5)
-
-    def test_id_increment(self):
-        """Test if the __nb_objects counter is incremented correctly."""
-        obj1 = Base()
-        obj2 = Base()
-        obj3 = Base(id=10)
-        self.assertEqual(obj3.id, 10)
+        It checks if the objects are initialized with correct IDs.
+        """
+        self.assertEqual(self.b1.id, 1)
+        self.assertEqual(self.b2.id, 10)
 
     def test_to_json_string(self):
-        """Test if to_json_string converts list of dictionaries to JSON string."""
-        data = [{'key': 'value'}, {'key': 'value'}]
-        json_string = Base.to_json_string(data)
-        self.assertEqual(json_string, '[{"key": "value"}, {"key": "value"}]')
-
-    def test_from_json_string(self):
-        """Test if from_json_string converts JSON string to list of dictionaries."""
-        json_string = '[{"key": "value"}, {"key": "value"}]'
-        data = Base.from_json_string(json_string)
-        self.assertEqual(data, [{'key': 'value'}, {'key': 'value'}])
+        """Test the to_json_string method of Base class."""
+        self.assertEqual(Base.to_json_string(None), "[]")
+        self.assertEqual(Base.to_json_string([]), "[]")
+        test_list = [{"key1": "value1"}, {"key2": "value2"}]
+        self.assertEqual(Base.to_json_string(test_list),
+                '[{"key1": "value1"}, {"key2": "value2"}]'
+                )
 
     def test_save_to_file(self):
-        """Test if save_to_file writes JSON string to file."""
-        data = [{'key': 'value'}, {'key': 'value'}]
-        Base.save_to_file(data)
-        self.assertTrue(os.path.exists(self.filename))
-        with open(self.filename, 'r') as file:
-            self.assertEqual(file.read(), '[{"key": "value"}, {"key": "value"}]')
+        """Test the save_to_file method of Base class."""
+        test_list = [self.b1, self.b2]
+        Base.save_to_file(test_list)
+        self.assertTrue(os.path.exists('Base.json'))
+        with open('Base.json', 'r') as file:
+            content = file.read()
+            self.assertEqual(content, '[{"id": 1}, {"id": 10}]')
 
-    def test_load_from_file(self):
-        """Test if load_from_file returns list of instances from file."""
-        data = [{'key': 'value'}, {'key': 'value'}]
-        with open(self.filename, 'w') as file:
-            file.write('[{"key": "value"}, {"key": "value"}]')
-        instances = Base.load_from_file()
-        self.assertEqual(len(instances), 2)
+    def test_from_json_string(self):
+        """test json to string"""
+        json_string = '[{"key1": "value1"}, {"key2": "value2"}]'
+        self.assertEqual(Base.from_json_string(json_string), [{"key1": "value1"}, {"key2": "value2"}])
+        self.assertEqual(Base.from_json_string(None), [])
+        self.assertEqual(Base.from_json_string(""), [])
 
     def test_create(self):
-        """Test if create method creates instance with attributes set."""
-        dictionary = {'id': 1, 'key': 'value'}
-        instance = Base.create(**dictionary)
-        self.assertEqual(instance.id, 1)
-        self.assertEqual(instance.key, 'value')
+        """checks method creates an instance with all attr set using a dict"""
+        dictionary = {"id": 5}
+        obj = Base.create(**dictionary)
+        self.assertIsInstance(obj, Base)
+        self.assertEqual(obj.id, 5)
+
+    def test_load_from_file(self):
+        """It checks if  method returns a list of instances from a JSON file"""
+        self.assertEqual(Base.load_from_file(), [])
+        
+        test_list = [self.b1, self.b2]
+        Base.save_to_file(test_list)
+        loaded_list = Base.load_from_file()
+        self.assertEqual(len(loaded_list), 2)
+        self.assertIsInstance(loaded_list[0], Base)
+        self.assertEqual(loaded_list[0].id, 1)
+        self.assertIsInstance(loaded_list[1], Base)
+        self.assertEqual(loaded_list[1].id, 10)
 
 
 if __name__ == '__main__':
