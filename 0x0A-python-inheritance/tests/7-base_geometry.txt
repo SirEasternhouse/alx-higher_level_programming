@@ -1,15 +1,23 @@
-#!/usr/bin/python3
-"""Base class for geometry operations."""
-
-
 class BaseGeometry:
     """
-        A base class for geometry operations.
+    A base class for geometry operations.
 
-        Public Methods:
-        area(): Raises an Exception with the message "area() is not implemented".
-        integer_validator(name, value): Validates an integer value.
-    """
+    Public Methods:
+    area(): Raises an Exception with the message "area() is not implemented".
+    integer_validator(name, value): Validates an integer value.
+    
+    >>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+    >>> bg = BaseGeometry()
+    >>> bg.area()
+    Traceback (most recent call last):
+        ...
+    Exception: area() is not implemented
+
+    >>> bg.integer_validator("test", 10)
+    >>> bg.integer_validator("test", -10)
+    Traceback (most recent call last):
+        ...
+    ValueError: test must be greater than 0
 
     def area(self):
         """
@@ -36,3 +44,7 @@ class BaseGeometry:
             raise TypeError("{} must be an integer".format(name))
         if value <= 0:
             raise ValueError("{} must be greater than 0".format(name))
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
