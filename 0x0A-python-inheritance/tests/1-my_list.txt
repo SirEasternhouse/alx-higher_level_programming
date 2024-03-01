@@ -1,41 +1,40 @@
 class MyList(list):
     """
-    A custom list class that inherits from list and provides additional functionality.
+    A subclass of list with additional functionality.
 
     Public Methods:
-        print_sorted(): Prints the list sorted in ascending order.
+    print_sorted(): Prints the list elements in sorted order.
 
-    Example:
-        >>> my_list = MyList()
-        >>> my_list.append(1)
-        >>> my_list.append(4)
-        >>> my_list.append(2)
-        >>> my_list.append(3)
-        >>> my_list.append(5)
-        >>> print(my_list)
-        [1, 4, 2, 3, 5]
-        >>> my_list.print_sorted()
-        [1, 2, 3, 4, 5]
-        >>> print(my_list)
-        [1, 4, 2, 3, 5]
-	"""
+    Examples
+    >>> MyList = __import__('1-my_list').MyList
+    >>> my_list = MyList([3, 1, 4, 1, 5, 9, 2, 6, 5])
+    >>> my_list.print_sorted()
+    [1, 1, 2, 3, 4, 5, 5, 6, 9]
+
+    >>> empty_list = MyList([])
+    >>> empty_list.print_sorted()
+    []
+
+    """
 
     def print_sorted(self):
-	"""
-        Prints the list sorted in ascending order.
+        """
+        Prints the elements of the list in sorted order.
 
-        Example:
-            >>> my_list = MyList()
-            >>> my_list.append(1)
-            >>> my_list.append(4)
-            >>> my_list.append(2)
-            >>> my_list.append(3)
-            >>> my_list.append(5)
-            >>> my_list.print_sorted()
-            [1, 2, 3, 4, 5]
-		"""
-		sorted_list = sorted(self)
-		print(sorted_list)
+        Examples:
+        >>> MyList = __import__('1-my_list').MyList
+        >>> my_list = MyList([3, 1, 4, 1, 5, 9, 2, 6, 5])
+        >>> my_list.print_sorted()
+        [1, 1, 2, 3, 4, 5, 5, 6, 9]
+
+        >>> empty_list = MyList([])
+        >>> empty_list.print_sorted()
+        []
+
+        """
+        sorted_list = sorted(self)
+        print(sorted_list)
+
 
 if __name__ == "__main__":
     import doctest
