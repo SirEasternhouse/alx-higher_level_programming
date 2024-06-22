@@ -32,8 +32,10 @@ def display_states_with_name():
     cursor = db.cursor()
 
     # Execute the query  retrieving states name matching  arg sorted by id
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    cursor.execute(query, (state_name_searched,))
+    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(
+            state_name_searched
+            )
+    cursor.execute(query)
 
     # Fetch all the rows in a list of lists
     rows = cursor.fetchall()
