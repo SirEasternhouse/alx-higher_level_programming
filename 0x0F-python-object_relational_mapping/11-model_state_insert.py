@@ -33,7 +33,7 @@ def add_louisiana():
     session = Session()
 
     # Creation of a new State Object
-    new_state = State(name="Loisiana")
+    new_state = State(name="Louisiana")
 
     # Addition of ne State object to sessin & commit
     session.add(new_state)
