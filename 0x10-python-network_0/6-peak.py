@@ -1,8 +1,10 @@
 #!/usr/bin/python3
+""" finding peak in unsorted list"""
+
 
 def find_peak(list_of_integers):
     """
-    Finds a pek in a list of unsorted intergers
+    Finds a peak in a list of unsorted intergers
     """
     if not list_of_integers:
         return None
